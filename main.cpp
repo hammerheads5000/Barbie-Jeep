@@ -79,6 +79,11 @@ void drive(DriveState driveState) {
     rightMotor.Set(TalonSRXControlMode::PercentOutput, driveState.rightDutycycle);
 }
 
+void sleepApp(int ms)
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+
 int main(int argc, char const *argv[])
 {
     init();
@@ -88,6 +93,8 @@ int main(int argc, char const *argv[])
         float steering = getSteeringAmount();
         DriveState driveState = steerAmountToDriveState(steering);
         drive(driveState);
+
+        sleepApp(20);
     }
 
     exit();
